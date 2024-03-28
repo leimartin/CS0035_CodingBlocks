@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move Sprite</title>
+    <style>
+        #container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative; /* Add relative positioning to the container */
+        }
+        #moveLeftButton, #moveRightButton {
+            padding: 10px 20px;
+            margin-right: 10px;
+        }
+        #sprite {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        #responseArea {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button id="moveLeftButton">Move Left</button>
+        <input type="number" id="numStepsInput" placeholder="Enter steps">
+        <button id="moveRightButton">Move Right</button>
+    </div>
+    <div id="sprite"></div>
+    <div id="responseArea"></div> <!-- Area to display the response -->
+    <script>
+        document.getElementById('moveLeftButton').addEventListener('click', function() {
+            moveSprite(-1);
+        });
+
+        document.getElementById('moveRightButton').addEventListener('click', function() {
+            moveSprite(1);
+        });
+
+        function moveSprite(direction) {
+            var numSteps = document.getElementById('numStepsInput').value;
+            if (!numSteps) {
+                alert("Please enter the number of steps.");
+                return;
+            }
+            var sprite = document.getElementById('sprite');
+            var containerWidth = document.getElementById('container').offsetWidth; // Get container width
+            var currentPosition = parseInt(window.getComputedStyle(sprite).getPropertyValue('left'));
+            var newPosition = currentPosition + (direction * parseInt(numSteps) * 50); // Adjust movement distance as needed
+            if (newPosition < 0) {
+                newPosition = 0; // Ensure sprite does not move beyond the left boundary
+            }
+            else if (newPosition > containerWidth - sprite.offsetWidth) {
+                newPosition = containerWidth - sprite.offsetWidth; // Ensure sprite does not move beyond the right boundary
+            }
+            sprite.style.left = newPosition + 'px';
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById('responseArea').innerText = xhr.responseText; // Display the response in the response area
+                }
+            };
+            xhr.open("GET", "backend.php?direction=" + direction + "&numSteps=" + numSteps, true);
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

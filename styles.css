@@ -1,0 +1,61 @@
+@font-face {
+  font-family: "SCProMedium";
+  src: url("SourceCodePro-Medium.ttf");
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  border-radius: 10px;
+  margin: auto 5px;
+  width: 15%;
+}
+
+img {
+  width: 30%;
+  height: 30%
+}
+
+/* ------------------  */
+
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+  position: relative;
+  /* Add relative positioning to the container */
+}
+
+#sprite {
+  width: 50px;
+  height: 50px;
+  background-color: red;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#responseArea {
+  font-family: "SCProMedium", Helvetica, sans-serif;
+  height: 5vh;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  position: absolute;
+  /* Position response area absolutely */
+  bottom: 0;
+  /* Place it at the bottom */
+  width: 100%;
+  /* Occupy full width of the container */
+  display: flex;
+  /* Use flexbox for centering */
+}
