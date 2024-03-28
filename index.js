@@ -47,25 +47,42 @@ function moveSprite(direction) {
 }
 
 function rotateSprite(direction) {
-    // Get the degrees input value
-    var degreesInput = parseInt(document.getElementById(direction === 'clockwise' ? 'clockwise' : 'counter-clockwise').value);
+    var degreesInput = parseInt(document.getElementById(direction === 'clockwise' ? 'clockwise' : 'cclockwise').value);
 
-    // Check if degrees input is a valid number
     if (isNaN(degreesInput)) {
         alert("Please enter a valid number for degrees.");
         return;
     }
-    var steps = "clockwise=" + clockwise + "&cclockwise=" + cclockwise;
 
-    // Send the message to the backend using AJAX
+    var sprite = document.getElementById('sprite');
+    var currentRotation = getRotationDegrees(sprite);
+    var newRotation = direction === 'clockwise' ? currentRotation + degreesInput : currentRotation - degreesInput;
+
+    // Adjust the new rotation to be between 0 and 360 degrees
+    newRotation = (360 + newRotation) % 360;
+
+    sprite.style.transform = 'rotate(' + newRotation + 'deg)';
+
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            // Upon receiving response from backend, display "Hello" along with provided degrees
-            var response = "Hello, " + xhr.responseText;
-            document.getElementById('responseArea').innerText = response;
+            document.getElementById('responseArea').innerText = xhr.responseText;
         }
     };
-    xhr.open("GET", "backend.php?" + steps + "&direction=" + direction, true);
+
+    var params = "direction=" + direction + "&degrees=" + degreesInput;
+    xhr.open("GET", "backend.php?" + params, true);
     xhr.send();
+}
+
+function getRotationDegrees(obj) {
+    var matrix = window.getComputedStyle(obj).getPropertyValue("transform");
+    if (matrix !== 'none') {
+        var values = matrix.split('(')[1].split(')')[0].split(',');
+        var a = values[0];
+        var b = values[1];
+        var angle = Math.round(Math.atan2(b, a) * (180/Math.PI));
+        return (angle < 0) ? angle + 360 : angle;
+    }
+    return 0;
 }

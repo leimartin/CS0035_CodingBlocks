@@ -47,12 +47,12 @@
 
                 <span class="button is-info is-light is-fullwidth my-3">
                     Turn ⭮<input type="number" name="clockwise" id="clockwise"> degrees
-                    <button class="button is-primary px-6 mx-4" name="motion-2"></button>
+                    <button class="button is-primary px-6 mx-4" name="motion-2" onclick="rotateSprite('clockwise')">Move</button>
                 </span>
 
                 <span class="button is-info is-light is-fullwidth my-3">Turn ⭯
                     <input type="number" name="counter-clockwise" id="cclockwise"> degrees
-                    <button class="button is-primary px-6 mx-4" name="motion-3"></button>
+                    <button class="button is-primary px-6 mx-4" name="motion-3" onclick="rotateSprite('counter-clockwise')">Move</button>
                 </span>
 
                 <span class="button is-info is-light is-fullwidth my-3">go to
