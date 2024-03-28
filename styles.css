@@ -2,7 +2,14 @@
   font-family: "SCProMedium";
   src: url("SourceCodePro-Medium.ttf");
 }
+@font-face {
+  font-family: "Poppins";
+  src: url("Poppins-Regular.ttf");
+}
 
+body {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+}
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -25,12 +32,15 @@ img {
 
 /* ------------------  */
 
+
 #container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 75vh;
   position: relative;
+  background-size: cover;
+  background-position: center;
   /* Add relative positioning to the container */
 }
 
@@ -39,22 +49,41 @@ img {
   height: 50px;
   background-color: red;
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 50%;
+  top: 50%;
 }
 
 #responseArea {
   font-family: "SCProMedium", Helvetica, sans-serif;
   justify-content: center;
-  /* Center horizontally */
   align-items: center;
-  /* Center vertically */
   position: absolute;
-  /* Position response area absolutely */
   bottom: 0;
-  /* Place it at the bottom */
   width: 100%;
-  /* Occupy full width of the container */
   display: flex;
-  /* Use flexbox for centering */
 }
+
+/* operator */
+.circle {
+  display: inline-block;
+}
+
+.circleContainer {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.backdrop {
+  box-shadow: 2px 8px 10px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  background: #FFF;
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
