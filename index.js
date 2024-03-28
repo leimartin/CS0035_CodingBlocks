@@ -58,7 +58,6 @@ function rotateSprite(direction) {
     var currentRotation = getRotationDegrees(sprite);
     var newRotation = direction === 'clockwise' ? currentRotation + degreesInput : currentRotation - degreesInput;
 
-    // Adjust the new rotation to be between 0 and 360 degrees
     newRotation = (360 + newRotation) % 360;
 
     sprite.style.transform = 'rotate(' + newRotation + 'deg)';
@@ -87,7 +86,6 @@ function getRotationDegrees(obj) {
     return 0;
 }
 
-// operators
 function addCircles(operator) {
     var add_lnum = parseInt(document.getElementById('add-lnum').value);
     var add_rnum = parseInt(document.getElementById('add-rnum').value);
@@ -100,26 +98,23 @@ function addCircles(operator) {
     var total = add_lnum + add_rnum;
     var circleContainer = document.getElementById('circleContainer');
 
-    // Remove excess circles if any
     while (circleContainer.firstChild) {
         circleContainer.removeChild(circleContainer.firstChild);
     }
 
-    // Add circles dynamically
     for (var i = 0; i < total; i++) {
         var circle = document.createElement('div');
         circle.className = 'circle';
-        circle.style.backgroundColor = 'blue'; // Adjust circle color as needed
-        circle.style.width = '20px'; // Adjust circle size as needed
-        circle.style.height = '20px'; // Adjust circle size as needed
+        circle.style.backgroundColor = 'blue'; 
+        circle.style.width = '20px';
+        circle.style.height = '20px'; 
         circle.style.borderRadius = '50%';
         circle.style.position = 'absolute';
-        circle.style.top = Math.random() * 200 + 'px'; // Adjust range of top position as needed
-        circle.style.left = Math.random() * 200 + 'px'; // Adjust range of left position as needed
+        circle.style.top = Math.random() * 200 + 'px'; 
+        circle.style.left = Math.random() * 200 + 'px'; 
         circleContainer.appendChild(circle);
     }
 
-    // Send the numbers and operator to the backend using AJAX
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
@@ -140,26 +135,23 @@ function updateCircles(operator) {
     var total = sub_lnum - sub_rnum;
     var circleContainer = document.getElementById('circleContainer');
 
-    // Remove excess circles if any
     while (circleContainer.firstChild) {
         circleContainer.removeChild(circleContainer.firstChild);
     }
 
-    // Add circles dynamically
     for (var i = 0; i < total; i++) {
         var circle = document.createElement('div');
         circle.className = 'circle';
-        circle.style.backgroundColor = 'blue'; // Adjust circle color as needed
-        circle.style.width = '20px'; // Adjust circle size as needed
-        circle.style.height = '20px'; // Adjust circle size as needed
+        circle.style.backgroundColor = 'blue'; 
+        circle.style.width = '20px'; 
+        circle.style.height = '20px'; 
         circle.style.borderRadius = '50%';
         circle.style.position = 'absolute';
-        circle.style.top = Math.random() * 200 + 'px'; // Adjust range of top position as needed
-        circle.style.left = Math.random() * 200 + 'px'; // Adjust range of left position as needed
+        circle.style.top = Math.random() * 200 + 'px';
+        circle.style.left = Math.random() * 200 + 'px'; 
         circleContainer.appendChild(circle);
     }
 
-    // Send the numbers and operator to the backend using AJAX
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
@@ -184,26 +176,23 @@ function multiplyCircles() {
     var total = num1 * num2;
     var circleContainer = document.getElementById('circleContainer');
 
-    // Remove excess circles if any
     while (circleContainer.firstChild) {
         circleContainer.removeChild(circleContainer.firstChild);
     }
 
-    // Add circles dynamically
     for (var i = 0; i < total; i++) {
         var circle = document.createElement('div');
         circle.className = 'circle';
-        circle.style.backgroundColor = 'blue'; // Adjust circle color as needed
-        circle.style.width = '20px'; // Adjust circle size as needed
-        circle.style.height = '20px'; // Adjust circle size as needed
+        circle.style.backgroundColor = 'blue'; 
+        circle.style.width = '20px'; 
+        circle.style.height = '20px'; 
         circle.style.borderRadius = '50%';
         circle.style.position = 'absolute';
-        circle.style.top = Math.random() * 200 + 'px'; // Adjust range of top position as needed
-        circle.style.left = Math.random() * 200 + 'px'; // Adjust range of left position as needed
+        circle.style.top = Math.random() * 200 + 'px';
+        circle.style.left = Math.random() * 200 + 'px'; 
         circleContainer.appendChild(circle);
     }
 
-    // Send the numbers and operator to the backend using AJAX
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
@@ -230,29 +219,26 @@ function divideCircles() {
         return;
     }
 
-    var total = Math.floor(num1 / num2); // Using Math.floor to ensure only integer division
+    var total = Math.floor(num1 / num2); 
     var circleContainer = document.getElementById('circleContainer');
 
-    // Remove excess circles if any
     while (circleContainer.firstChild) {
         circleContainer.removeChild(circleContainer.firstChild);
     }
 
-    // Add circles dynamically
     for (var i = 0; i < total; i++) {
         var circle = document.createElement('div');
         circle.className = 'circle';
-        circle.style.backgroundColor = 'blue'; // Adjust circle color as needed
-        circle.style.width = '20px'; // Adjust circle size as needed
-        circle.style.height = '20px'; // Adjust circle size as needed
+        circle.style.backgroundColor = 'blue'; 
+        circle.style.width = '20px'; 
+        circle.style.height = '20px'; 
         circle.style.borderRadius = '50%';
         circle.style.position = 'absolute';
-        circle.style.top = Math.random() * 200 + 'px'; // Adjust range of top position as needed
-        circle.style.left = Math.random() * 200 + 'px'; // Adjust range of left position as needed
+        circle.style.top = Math.random() * 200 + 'px'; 
+        circle.style.left = Math.random() * 200 + 'px'; 
         circleContainer.appendChild(circle);
     }
 
-    // Send the numbers and operator to the backend using AJAX
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
@@ -268,37 +254,32 @@ function divideCircles() {
 // events
 function changeBackdrop(backdrop) {
     var imageContainer = document.getElementById('container');
-    
-    // Set background image URL based on the selected backdrop
+
     switch (backdrop) {
         case 'sunset':
-            imageContainer.style.backgroundImage = "url('sunset.jpg')";
+            imageContainer.style.backgroundImage = "url('../images/sunset.jpg')";
             break;
         case 'forest':
-            imageContainer.style.backgroundImage = "url('forest.jpg')";
+            imageContainer.style.backgroundImage = "url('../images/forest.jpg')";
             break;
         case 'sea':
-            imageContainer.style.backgroundImage = "url('sea.jpg')";
+            imageContainer.style.backgroundImage = "url('../images/sea.jpg')";
             break;
         case 'city':
-            imageContainer.style.backgroundImage = "url('city.jpg')";
+            imageContainer.style.backgroundImage = "url('../images/city.jpg')";
             break;
         default:
-            // Default background image if backdrop is not recognized
-            imageContainer.style.backgroundImage = "url('default.jpg')";
+            imageContainer.style.backgroundImage = "url('default.jpg')"; // later
             break;
     }
 
-    // Send an AJAX request to backend PHP script
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            // Display the response from the backend
-            console.log(xhr.responseText);
+            document.getElementById('responseArea').innerText = xhr.responseText;
         }
     };
 
-    // Send a request to backend.php with the selected backdrop
     xhr.open("GET", "backend.php?backdrop=" + backdrop, true);
     xhr.send();
 }

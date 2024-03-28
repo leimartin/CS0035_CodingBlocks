@@ -10,7 +10,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            position: relative; /* Add relative positioning to the container */
+            position: relative;
         }
         #moveLeftButton, #moveRightButton {
             padding: 10px 20px;
@@ -43,7 +43,7 @@
         <button id="moveRightButton">Move Right</button>
     </div>
     <div id="sprite"></div>
-    <div id="responseArea"></div> <!-- Area to display the response -->
+    <div id="responseArea"></div>
     <script>
         document.getElementById('moveLeftButton').addEventListener('click', function() {
             moveSprite(-1);
@@ -60,21 +60,21 @@
                 return;
             }
             var sprite = document.getElementById('sprite');
-            var containerWidth = document.getElementById('container').offsetWidth; // Get container width
+            var containerWidth = document.getElementById('container').offsetWidth; width
             var currentPosition = parseInt(window.getComputedStyle(sprite).getPropertyValue('left'));
-            var newPosition = currentPosition + (direction * parseInt(numSteps) * 50); // Adjust movement distance as needed
+            var newPosition = currentPosition + (direction * parseInt(numSteps) * 50);
             if (newPosition < 0) {
-                newPosition = 0; // Ensure sprite does not move beyond the left boundary
+                newPosition = 0; 
             }
             else if (newPosition > containerWidth - sprite.offsetWidth) {
-                newPosition = containerWidth - sprite.offsetWidth; // Ensure sprite does not move beyond the right boundary
+                newPosition = containerWidth - sprite.offsetWidth; 
             }
             sprite.style.left = newPosition + 'px';
 
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById('responseArea').innerText = xhr.responseText; // Display the response in the response area
+                    document.getElementById('responseArea').innerText = xhr.responseText; 
                 }
             };
             xhr.open("GET", "backend.php?direction=" + direction + "&numSteps=" + numSteps, true);

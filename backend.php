@@ -1,7 +1,5 @@
-
 <?php
 if (isset($_GET['direction']) && isset($_GET['left']) && isset($_GET['right']) && isset($_GET['up']) && isset($_GET['down'])) {
-    // Get the direction and steps values
     $direction = $_GET['direction'];
     $left = $_GET['left'];
     $right = $_GET['right'];
@@ -61,23 +59,18 @@ if (isset($_GET['direction']) && isset($_GET['left']) && isset($_GET['right']) &
 } else if (isset($_GET['backdrop'])) {
     $backdrop = $_GET['backdrop'];
 
-    // Define responses for each backdrop
     $responses = array(
         'sunset' => 'Changed backdrop to sunset.',
-        'forest' => 'Changed backdrop to forest.',
         'sea' => 'Changed backdrop to sea.',
+        'forest' => 'Changed backdrop to forest.',
         'city' => 'Changed backdrop to city.'
     );
 
-    // Check if the backdrop exists in the array
     if (array_key_exists($backdrop, $responses)) {
-        // Echo the response corresponding to the selected backdrop
         echo $responses[$backdrop];
     } else {
-        // If the backdrop is not found, echo a default message
         echo 'Invalid backdrop selection.';
     }
-}else{
-    // If direction or steps parameters are not set, return an error message
+} else {
     echo "Error: Direction or steps values not provided.";
 }

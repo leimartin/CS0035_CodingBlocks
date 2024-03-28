@@ -29,5 +29,5 @@
 <span class="button has-background-success-light is-light is-text-left is-fullwidth my-3">
     <input type="number" name="num-steps" id="greater-lnum"> > 
     <input type="number" name="num-steps" id="greater-rnum">
-    <button class="button is-primary px-3 mx-3" name="operator-1" onclick="divideCircles()">compare</button>
+    <button class="button is-primary px-3 mx-3" name="operator-1" onclick="divideCircles()">...</button>
 </span>
