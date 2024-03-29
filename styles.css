@@ -1,11 +1,11 @@
 @font-face {
   font-family: "SCProMedium";
-  src: url("SourceCodePro-Medium.ttf");
+  src: url("fonts/SourceCodePro-Medium.ttf");
 }
 
 @font-face {
   font-family: "Poppins";
-  src: url("Poppins-Regular.ttf");
+  src: url("fonts/Poppins-Regular.ttf");
 }
 
 body {
@@ -51,7 +51,7 @@ img {
   top: 45%;
 }
 
-#responseArea {
+#response-area {
   font-family: "SCProMedium", Helvetica, sans-serif;
   justify-content: center;
   align-items: center;
@@ -66,7 +66,7 @@ img {
   display: inline-block;
 }
 
-.circleContainer {
+.circle-container {
   position: relative;
   width: 300px;
   height: 300px;
@@ -76,7 +76,8 @@ img {
 }
 
 /* events */
-.backdrop {
+.backdrop,
+.location {
   box-shadow: 2px 8px 10px 1px rgba(0, 0, 0, 0.3);
   border-radius: 15px;
   background: #FFF;
@@ -84,3 +85,14 @@ img {
   padding: 5px 10px;
 }
 
+.img-btn,
+.img-logo {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+}
+
+.img-logo {
+  height: 60px;
+  width: 60px;
+}
