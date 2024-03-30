@@ -2,62 +2,79 @@ function show_buttons(category) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("contentArea").innerHTML = this.responseText;
+            document.getElementById("content-area").innerHTML = this.responseText;
         }
     };
-    xhttp.open("GET", "components/" + category + ".php", true);
+    xhttp.open("GET", "components/" + category + ".html", true);
     xhttp.send();
 }
 
-// motion
+// motion-1
 function move_sprite(direction) {
-    var right = document.getElementById('right').value;
-    var left = document.getElementById('left').value;
-    var down = document.getElementById('down').value;
-    var up = document.getElementById('up').value;
+    var step_size = parseInt(document.getElementById(direction).value);
+    var container = document.getElementById('container');
+    var sprite = document.getElementById('sprite');
 
-    var container_width = document.getElementById('container').offsetWidth;
-    var container_height = document.getElementById('container').offsetHeight;
+    var current_left = parseInt(window.getComputedStyle(sprite).getPropertyValue('left'));
+    var current_top = parseInt(window.getComputedStyle(sprite).getPropertyValue('top'));
 
-    var sprite_width = document.getElementById('sprite').offsetWidth;
-    var sprite_height = document.getElementById('sprite').offsetHeight;
+    var radians = (rotation_degrees(sprite)) * Math.PI / 180;
 
-    var position_left = parseInt(window.getComputedStyle(document.getElementById('sprite')).getPropertyValue('left'));
-    var position_top = parseInt(window.getComputedStyle(document.getElementById('sprite')).getPropertyValue('top'));
+    var horizontal = Math.cos(radians) * step_size;
+    var vertical = Math.sin(radians) * step_size;
 
     switch (direction) {
         case 'right':
-            position_left += parseInt(right);
+            current_left += horizontal;
+            current_top += vertical;
             break;
         case 'left':
-            position_left -= parseInt(left);
+            current_left -= horizontal;
+            current_top -= vertical;
             break;
         case 'down':
-            position_top += parseInt(down);
+            current_left -= vertical;
+            current_top += horizontal;
             break;
         case 'up':
-            position_top -= parseInt(up);
+            current_left += vertical;
+            current_top -= horizontal;
             break;
     }
 
-    position_left = Math.max(0, Math.min(position_left, container_width - sprite_width));
-    position_top = Math.max(0, Math.min(position_top, container_height - sprite_height));
+    current_left = Math.max(0, Math.min(current_left, container.offsetWidth - sprite.offsetWidth));
+    current_top = Math.max(0, Math.min(current_top, container.offsetHeight - sprite.offsetHeight));
 
-    document.getElementById('sprite').style.left = position_left + 'px';
-    document.getElementById('sprite').style.top = position_top + 'px';
+    sprite.style.left = current_left + 'px';
+    sprite.style.top = current_top + 'px';
 
-    var steps = "left=" + left + "&right=" + right + "&up=" + up + "&down=" + down;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             document.getElementById('response-area').innerText = xhr.responseText;
         }
     };
-    xhr.open("GET", "backend.php?" + steps + "&direction=" + direction, true);
+    var steps = step_size + "&current_left=" + current_left + "&current_top=" + current_top;
+    xhr.open("GET", "backend.php?step_size=" + steps + "&direction=" + direction, true);
     xhr.send();
+
+
 }
 
-// motion
+
+
+// motion-2
+function rotation_degrees(object) {
+    var matrix = window.getComputedStyle(object).getPropertyValue("transform");
+    if (matrix !== 'none') {
+        var values = matrix.split('(')[1].split(')')[0].split(',');
+        var x = values[0];
+        var y = values[1];
+        var angle = Math.round(Math.atan2(y, x) * (180 / Math.PI));
+        return (angle < 0) ? angle + 360 : angle;
+    } return 0;
+}
+
 function rotate_sprite(direction) {
     var degrees = parseInt(document.getElementById(direction === 'clockwise' ? 'clockwise' : 'counter-clockwise').value);
 
@@ -79,23 +96,12 @@ function rotate_sprite(direction) {
     xhr.send();
 }
 
-function rotation_degrees(obj) {
-    var matrix = window.getComputedStyle(obj).getPropertyValue("transform");
-    if (matrix !== 'none') {
-        var values = matrix.split('(')[1].split(')')[0].split(',');
-        var x = values[0];
-        var y = values[1];
-        var angle = Math.round(Math.atan2(y, x) * (180 / Math.PI));
-        return (angle < 0) ? angle + 360 : angle;
-    } return 0;
-}
-
-// motion
+// motion-3
 function random_coordinates(container, sprite) {
     var random_left = Math.floor(Math.random() * (container.offsetWidth - sprite.offsetWidth));
-    var random_right = Math.floor(Math.random() * (container.offsetHeight - sprite.offsetHeight));
+    var random_top = Math.floor(Math.random() * (container.offsetHeight - sprite.offsetHeight));
 
-    return { left: random_left, top: random_right };
+    return { left: random_left, top: random_top };
 }
 
 function random_position() {
@@ -116,20 +122,163 @@ function random_position() {
     xhr.send();
 }
 
+// motion-4
+function move_axis() {
+
+    var goto_x = parseInt(document.getElementById('goto-x').value);
+    var goto_y = parseInt(document.getElementById('goto-y').value);
+
+    var container = document.getElementById('container');
+    var sprite = document.getElementById('sprite');
+
+    updated_x = Math.max(0, Math.min(container.offsetWidth - sprite.offsetWidth, (container.offsetWidth / 2) + goto_x));
+    sprite.style.left = updated_x + 'px';
+
+    updated_y = Math.max(0, Math.min(container.offsetHeight - sprite.offsetHeight, (container.offsetHeight / 2) - goto_y));
+    sprite.style.top = updated_y + 'px';
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById('response-area').innerText = xhr.responseText;
+        }
+    };
+
+    var params = "&x=" + goto_x + "&y=" + goto_y;
+    xhr.open("GET", "backend.php?" + params, true);
+    xhr.send();
+}
+
+// motion-5
+function random_glide() {
+    var movement_duration = parseInt(document.getElementById('glide-rand').value);
+    var random_coordinate = random_coordinates(document.getElementById('container'), document.getElementById('sprite'));
+
+    setTimeout(function () {
+        document.getElementById('sprite').style.left = random_coordinate.left + 'px';
+        document.getElementById('sprite').style.top = random_coordinate.top + 'px';
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('response-area').innerText = xhr.responseText;
+            }
+        };
+
+        xhr.open("GET", "backend.php?&glide_rand=" + movement_duration, true);
+        xhr.send();
+    }, movement_duration * 1000);
+}
+
+// motion-6
+function move_rand_axis() {
+    var movement_duration = parseInt(document.getElementById('glide-durationXY').value);
+
+    var goto_randX = parseInt(document.getElementById('goto-randX').value);
+    var goto_randY = parseInt(document.getElementById('goto-randY').value);
+
+    var container = document.getElementById('container');
+    var sprite = document.getElementById('sprite');
+
+    setTimeout(function () {
+        var updated_x = Math.max(0, Math.min(container.offsetWidth - sprite.offsetWidth, (container.offsetWidth / 2) + goto_randX));
+        sprite.style.left = updated_x + 'px';
+
+        var updated_y = Math.max(0, Math.min(container.offsetHeight - sprite.offsetHeight, (container.offsetHeight / 2) - goto_randY));
+        sprite.style.top = updated_y + 'px';
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('response-area').innerText = xhr.responseText;
+            }
+        };
+
+        xhr.open("GET", "backend.php?&glide_randXY=" + movement_duration, true);
+        xhr.send();
+    }, movement_duration * 1000);
+}
+
+// motion-7
+function point_direction() {
+    var degrees = parseInt(document.getElementById('point_degrees').value);
+
+    var radians = degrees * Math.PI / 180;
+
+    var updated_x = (document.getElementById('container').offsetWidth / 2) + Math.cos(radians) * (document.getElementById('sprite').offsetWidth / 2);
+    var updated_y = (document.getElementById('container').offsetHeight / 2) + Math.sin(radians) * (document.getElementById('sprite').offsetHeight / 2);
+
+    document.getElementById('sprite').style.left = (updated_x - document.getElementById('sprite').offsetWidth / 2) + 'px';
+    document.getElementById('sprite').style.top = (updated_y - document.getElementById('sprite').offsetHeight / 2) + 'px';
+    document.getElementById('sprite').style.transform = 'rotate(' + degrees + 'deg)';
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById('response-area').innerText = xhr.responseText;
+        }
+    };
+
+    xhr.open("GET", "backend.php?position_direction=" + degrees, true);
+    xhr.send();
+}
+
+// motion-8
+function change_x() {
+    var change_X = parseInt(document.getElementById('change_X').value);
+
+    var updated_x = parseInt(document.getElementById('sprite').style.left || getComputedStyle(document.getElementById('sprite')).left) + change_X;
+
+    updated_x = Math.max(0, Math.min(document.getElementById('container').offsetWidth - document.getElementById('sprite').offsetWidth, updated_x));
+
+    document.getElementById('sprite').style.left = updated_x + 'px';
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById('response-area').innerText = xhr.responseText;
+        }
+    };
+
+    xhr.open("GET", "backend.php?position_x=" + change_X, true);
+    xhr.send();
+}
+
+// motion-8
+function change_y() {
+    var change_Y = parseInt(document.getElementById('change_Y').value);
+
+    var updated_y = parseInt(document.getElementById('sprite').style.top || getComputedStyle(document.getElementById('sprite')).top) - change_Y;
+
+    updated_y = Math.max(0, Math.min(document.getElementById('container').offsetHeight - document.getElementById('sprite').offsetHeight, updated_y));
+
+    sprite.style.top = updated_y + 'px';
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById('response-area').innerText = xhr.responseText;
+        }
+    };
+
+    xhr.open("GET", "backend.php?position_y=" + change_Y, true);
+    xhr.send();
+}
+
 
 
 function add_circles(operator) {
     var add_num1 = parseInt(document.getElementById('add-lnum').value);
     var add_num2 = parseInt(document.getElementById('add-rnum').value);
 
-    var total = add_num1 + add_num2;
+    let result = add_num1 + add_num2;
     var circle_container = document.getElementById('circle-container');
 
     while (circle_container.firstChild) {
         circle_container.removeChild(circle_container.firstChild);
     }
 
-    for (var i = 0; i < total; i++) {
+    for (var i = 0; i < result; i++) {
         var circle = document.createElement('div');
         circle.className = 'circle';
         circle.style.backgroundColor = '#97E7E1';
@@ -158,14 +307,14 @@ function reduce_circles(operator) {
     var sub_num1 = parseInt(document.getElementById('sub-lnum').value);
     var sub_num2 = parseInt(document.getElementById('sub-rnum').value);
 
-    var total = sub_num1 - sub_num2;
+    let result = sub_num1 - sub_num2;
     var circle_container = document.getElementById('circle-container');
 
     while (circle_container.firstChild) {
         circle_container.removeChild(circle_container.firstChild);
     }
 
-    for (var i = 0; i < total; i++) {
+    for (var i = 0; i < result; i++) {
         var circle = document.createElement('div');
         circle.className = 'circle';
         circle.style.backgroundColor = '#76885B';
@@ -193,14 +342,14 @@ function multiply_circles() {
     var mult_num1 = parseInt(document.getElementById('mul-lnum').value);
     var mult_num2 = parseInt(document.getElementById('mul-rnum').value);
 
-    var total = mult_num1 * mult_num2;
+    let result = mult_num1 * mult_num2;
     var circle_container = document.getElementById('circle-container');
 
     while (circle_container.firstChild) {
         circle_container.removeChild(circle_container.firstChild);
     }
 
-    for (var i = 0; i < total; i++) {
+    for (var i = 0; i < result; i++) {
         var circle = document.createElement('div');
         circle.className = 'circle';
         circle.style.backgroundColor = '#D6DAC8';
@@ -233,14 +382,14 @@ function split_circles() {
         return;
     }
 
-    var total = Math.floor(div_num1 / div_num2);
+    let result = Math.floor(div_num1 / div_num2);
     var circle_container = document.getElementById('circle-container');
 
     while (circle_container.firstChild) {
         circle_container.removeChild(circle_container.firstChild);
     }
 
-    for (var i = 0; i < total; i++) {
+    for (var i = 0; i < result; i++) {
         var circle = document.createElement('div');
         circle.className = 'circle';
         circle.style.backgroundColor = '#D6DAC8';
@@ -281,24 +430,30 @@ function compare(logic) {
 
     switch (logic) {
         case 'greater':
-            updated_size = Math.max(sprite_size, Math.max(lNum, rNum));
+            if (lNum > rNum)
+                updated_size = Math.max(sprite_size, Math.max(lNum, rNum));
             break;
         case 'less':
-            updated_size = Math.min(sprite_size, Math.min(lNum, rNum));
+            if (lNum < rNum)
+                updated_size = Math.min(sprite_size, Math.min(lNum, rNum));
             break;
         case 'greaterEqual':
             var increase = (rNum + lNum) / 50;
-            updated_opacity = Math.min(1, sprite_opacity + increase);
+            if (lNum >= rNum)
+                updated_opacity = Math.min(1, sprite_opacity + increase);
             break;
         case 'lessEqual':
             var decrease = (rNum - lNum) / 50;
-            updated_opacity = Math.max(0, sprite_opacity - decrease);
+            if (lNum <= rNum)
+                updated_opacity = Math.max(0, sprite_opacity - decrease);
             break;
         case 'equal':
-            updated_opacity = 1;
+            if (lNum == rNum)
+                updated_opacity = 1;
             break;
         case 'notEqual':
-            updated_opacity /= 2;
+            if (lNum != rNum)
+                updated_opacity /= 2;
             break;
     }
 
@@ -358,36 +513,36 @@ function change_backdrop(backdrop) {
 document.addEventListener('DOMContentLoaded', () => {
     // Functions to open and close a modal
     function openModal($el) {
-      $el.classList.add('is-active');
+        $el.classList.add('is-active');
     }
-  
+
     function closeModal($el) {
-      $el.classList.remove('is-active');
+        $el.classList.remove('is-active');
     }
-  
+
     // Add a click event on buttons to open a specific modal
     (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-      const modal = $trigger.dataset.target;
-      const $target = document.getElementById(modal);
-  
-      $trigger.addEventListener('click', () => {
-        openModal($target);
-      });
+        const modal = $trigger.dataset.target;
+        const $target = document.getElementById(modal);
+
+        $trigger.addEventListener('click', () => {
+            openModal($target);
+        });
     });
-  
+
     // Add a click event on various child elements to close the parent modal
     (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-      const $target = $close.closest('.modal');
-  
-      $close.addEventListener('click', () => {
-        closeModal($target);
-      });
+        const $target = $close.closest('.modal');
+
+        $close.addEventListener('click', () => {
+            closeModal($target);
+        });
     });
-  
+
     // Add a keyboard event to close all modals
     document.addEventListener('keydown', (event) => {
-      if(event.key === "Escape") {
-        closeAllModals();
-      }
+        if (event.key === "Escape") {
+            closeAllModals();
+        }
     });
-  });
+});

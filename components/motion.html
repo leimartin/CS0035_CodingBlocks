@@ -1,0 +1,75 @@
+<span class="button has-background-info-light is-light is-text-left is-fullwidth my-3">
+    Move <input type="number" id="right"> steps to the right
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4"
+        onclick="move_sprite('right')">Move</button>
+</span>
+
+<span class="button has-background-info-light is-light is-text-left is-fullwidth my-3">
+    Move <input type="number" id="left"> steps to the left
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4" onclick="move_sprite('left')">Move</button>
+</span>
+
+<span class="button has-background-info-light is-light is-text-left is-fullwidth my-3">
+    Move <input type="number" id="down"> steps downwards
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4" onclick="move_sprite('down')">Move</button>
+</span>
+
+<span class="button has-background-info-light is-light is-text-left is-fullwidth my-3">
+    Move <input type="number" id="up"> steps upwards
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4" onclick="move_sprite('up')">Move</button>
+</span>
+
+<span class="button has-background-info-light is-light is-fullwidth my-3">
+    Turn ⭮<input type="number" name="clockwise" id="clockwise"> degrees
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4"
+        onclick="rotate_sprite('clockwise')">Move</button>
+</span>
+
+<span class="button has-background-info-light is-light is-fullwidth my-3">Turn ⭯
+    <input type="number" name="counter-clockwise" id="counter-clockwise"> degrees
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4"
+        onclick="rotate_sprite('counter-clockwise')">Move</button>
+</span>
+
+<span class="button has-background-info-light is-light is-fullwidth my-3">go to
+    <p class="location ml-1">random_position</p>
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4"
+        onclick="random_position()">Move</button>
+</span>
+
+<span class="button has-background-info-light is-light is-text-left is-fullwidth my-3">
+    go to x:<input type="number" id="goto-x" class="mr-1"> y:<input type="number" id="goto-y" class="mr-1">
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4" onclick="move_axis()">Move</button>
+</span>
+
+<span class="button has-background-info-light is-light is-fullwidth my-3">glide
+    <input type="number" id="glide-rand" class="mr-1"> secs to <p class="location ml-1">random_position</p>
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4"
+        onclick="random_glide()">Move</button>
+</span>
+
+<span class="button has-background-info-light is-light is-fullwidth my-3">glide
+    <input type="number" id="glide-durationXY" class="mr-1"> secs to 
+    x:<input type="number" id="goto-randX" class="mr-1"> 
+    y:<input type="number" id="goto-randY" class="mr-1">
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4"
+        onclick="move_rand_axis()">Move</button>
+</span>
+
+<span class="button has-background-info-light is-light is-text-left is-fullwidth my-3">
+    Point in direction <input type="number" id="point_degrees">
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4"
+        onclick="point_direction()">Move</button>
+</span>
+
+<span class="button has-background-info-light is-light is-text-left is-fullwidth my-3">
+    Change x by <input type="number" id="change_X">
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4"
+        onclick="change_x()">Move</button>
+</span>
+
+<span class="button has-background-info-light is-light is-text-left is-fullwidth my-3">
+    Change y by <input type="number" id="change_Y">
+    <button class="button is-info is-focused has-text-weight-bold px-4 mx-4"
+        onclick="change_y()">Move</button>
+</span>
