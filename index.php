@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Blocks</title>
+    <title>Coding Block</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -22,7 +22,6 @@
             </div>
         </div>
     </nav>
-
 
     <div class="columns is-multiline is-desktop">
         <div class="column is-2 my-1">
@@ -67,10 +66,12 @@
                 <h3 class="title is-4 mb-1">MAGISTRADO, Zach Stephan A.</h3>
             </section>
             <footer class="modal-card-foot center-footer">
-                <h3 class="title is-4 mb-1">
-                    3rd Year BSCS - AN31
-                </h3>
+            <div class="footer-content">
+                <h3 class="title is-4 mb-1">3rd Year BSCS - AN31</h3>
+                <h4 class="subtitle is-6">CS0035: Final Project</h4>
+            </div> 
             </footer>
+
 
         </div>
     </div>
