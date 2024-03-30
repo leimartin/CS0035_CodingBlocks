@@ -20,7 +20,8 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type=number],
+input[type=text] {
   -moz-appearance: textfield;
   border-radius: 10px;
   margin: auto 5px;
@@ -54,14 +55,16 @@ img {
 #response-area {
   font-family: "SCProMedium", Helvetica, sans-serif;
   height: 11vh;
-  overflow:auto;
+  overflow: auto;
 }
 
 .content-area {
   height: 85vh;
   overflow: auto;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* operator */
@@ -89,7 +92,7 @@ img {
 }
 
 .img-btn,
-.img-logo {
+.img-logo, .img-grp {
   height: 50px;
   width: 50px;
   object-fit: cover;
@@ -100,3 +103,41 @@ img {
   width: 60px;
 }
 
+.img-grp {
+  height: 200px;
+  width: 200px;
+}
+
+/* looks */
+.say_something {
+  background-color: #FFEBB2;
+  border-radius: 15px 50px 30px 5px;
+  border: outset #ccc;
+  padding: 5px 20px;
+  position: absolute;
+  font-size: 16px;
+  color: #000;
+}
+
+/* modal */
+.glow { 
+  color: black;
+  font-size: 50px;
+  text-align: center;
+  -webkit-animation: glow 0.125s ease-in-out infinite alternate;
+  -moz-animation: glow 0.125s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+      text-shadow: 0 0 5px #eeeeee, 0 0 10px #97E7E1, 0 0 15px #97E7E1, 0 0 20px #97E7E1;
+  } to {
+      text-shadow: 0 0 5px #eeeeee, 0 0 10px #7AA2E3, 0 0 15px #7AA2E3, 0 0 20px #7AA2E3;
+  }
+}
+
+.center-footer {
+  display: flex;
+  justify-content: center;
+}

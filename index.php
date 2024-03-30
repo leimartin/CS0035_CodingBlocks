@@ -18,7 +18,7 @@
 
         <div id="navbarMenu" class="navbar-menu is-hidden-touch">
             <div class="navbar-end">
-                <a class="navbar-item js-modal-trigger" href="#" data-target="modal-js-example">About</a>
+                <a class="navbar-item js-modal-trigger has-text-link-light has-text-weight-bold" href="#" data-target="modal-js-example">About</a>
             </div>
         </div>
     </nav>
@@ -41,6 +41,9 @@
         <div class="column is-one-half my-3">
             <div class="box" id="container">
                 <div id="circle-container" class="circle-container"></div>
+                <div id="popup" class="popup">
+                    <span id="popup-text"></span>
+                </div>
                 <img src="images/cs0035-logo.png" alt="" id="sprite">
             </div>
             <div class="box" id="response-area" style="padding-top:-50%; position:relative;"></div>
@@ -51,18 +54,24 @@
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title is-size-2 has-text-weight-bold">tR0ph4n6 Kh0uL3t$</p>
+                <p class="modal-card-title is-size-2 has-text-weight-bold glow">Coding Block</p>
+
                 <button class="delete" aria-label="close"></button>
             </header>
-            <section class="modal-card-body">
+            <section class="modal-card-body has-text-centered">
+                <img src="images/IMMT.png" alt="" class="img-grp">
+                <h2 class="title is-3 mb2 has-text-success-light has-text-weight-bold">tR0ph4n6 Kh0uL3t$</h2>
                 <h3 class="title is-4 mb-1">MARTIN, Katryna Lei V.</h3>
                 <h3 class="title is-4 mb-1">INACAY, Vassili L.</h3>
-                <h3 class="title is-4 mb-1">MAGISTRADO, Zach Stephan A.</h3>
                 <h3 class="title is-4 mb-1">TAN, Adrian Jude P.</h3>
+                <h3 class="title is-4 mb-1">MAGISTRADO, Zach Stephan A.</h3>
             </section>
-            <footer class="modal-card-foot ">
-                <h3 class="title is-4 mb-1">3rd Year BSCS - AN31</h3>
+            <footer class="modal-card-foot center-footer">
+                <h3 class="title is-4 mb-1">
+                    3rd Year BSCS - AN31
+                </h3>
             </footer>
+
         </div>
     </div>
 

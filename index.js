@@ -61,8 +61,6 @@ function move_sprite(direction) {
 
 }
 
-
-
 // motion-2
 function rotation_degrees(object) {
     var matrix = window.getComputedStyle(object).getPropertyValue("transform");
@@ -265,8 +263,6 @@ function change_y() {
     xhr.send();
 }
 
-
-
 function add_circles(operator) {
     var add_num1 = parseInt(document.getElementById('add-lnum').value);
     var add_num2 = parseInt(document.getElementById('add-rnum').value);
@@ -301,7 +297,6 @@ function add_circles(operator) {
     xhr.open("GET", "backend.php?" + params, true);
     xhr.send();
 }
-
 
 function reduce_circles(operator) {
     var sub_num1 = parseInt(document.getElementById('sub-lnum').value);
@@ -510,6 +505,64 @@ function change_backdrop(backdrop) {
     xhr.send();
 }
 
+// looks-1
+function say_something() {
+    var text = document.getElementById('say_something').value;
+    var duration = parseInt(document.getElementById('words_duration').value) * 1000; 
+
+    var display_text = document.createElement('div');
+    display_text.textContent = text;
+    display_text.classList.add('say_something');
+
+    var sprite_rec = document.getElementById('sprite').getBoundingClientRect();
+    var container_rec = document.getElementById('container').getBoundingClientRect();
+
+    display_text.style.left = (sprite_rec.right - container_rec.left) + 'px';
+    display_text.style.top = (sprite_rec.top - container_rec.top) + 'px';
+
+    document.getElementById('container').appendChild(display_text);
+
+    setTimeout(function() {
+        display_text.remove();
+    }, duration);
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById('response-area').innerText = xhr.responseText;
+        }
+    };
+
+    xhr.open("GET", "backend.php?text=" + text, true);
+    xhr.send();
+}
+
+// looks-2
+function say_intact() {
+    var text = document.getElementById('text_intact').value;
+
+    var display_text = document.createElement('div');
+    display_text.textContent = text;
+    display_text.classList.add('say_something');
+
+    var sprite_rec = document.getElementById('sprite').getBoundingClientRect();
+    var container_rec = document.getElementById('container').getBoundingClientRect();
+
+    display_text.style.left = (sprite_rec.right - container_rec.left) + 'px';
+    display_text.style.top = (sprite_rec.top - container_rec.top) + 'px';
+
+    document.getElementById('container').appendChild(display_text);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById('response-area').innerText = xhr.responseText;
+        }
+    };
+
+    xhr.open("GET", "backend.php?text_intact=" + text, true);
+    xhr.send();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // Functions to open and close a modal
     function openModal($el) {
@@ -546,3 +599,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
