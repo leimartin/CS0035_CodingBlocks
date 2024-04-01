@@ -211,3 +211,4 @@ if (isset($_GET['step_size']) && isset($_GET['direction']) && isset($_GET['curre
 } else {
     echo "Error: values not provided.";
 }
+

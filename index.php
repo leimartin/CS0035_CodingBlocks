@@ -13,7 +13,16 @@
     <nav class="navbar has-background-dark-grey" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <img src="images/cs0035-tbglogo.png" alt="Logo" class="image is-64x64 p-1">
-            <div class="navbar-item navbar-center has-text-weight-bold is-size-4">tR0ph4n6 Kh0uL3t$</div>
+            <div class="navbar-item navbar-center has-text-weight-bold is-size-3">
+            <span class="has-text-success">d</span>
+                <span class="has-text-warning mr-2">o</span>
+                <span class="has-text-white-ter">w</span>
+                <span class="has-text-danger">h</span>
+                <span class="has-text-primary">i</span>
+                <span class="has-text-danger">l</span>
+                <span class="has-text-info mr-2">e</span>
+                <span class="has-text-warning ">😭</span>
+            </div>
         </div>
 
         <div id="navbarMenu" class="navbar-menu is-hidden-touch">
