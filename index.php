@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Block</title>
+    <title>Block Buddy  </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -14,14 +14,16 @@
         <div class="navbar-brand">
             <img src="images/cs0035-tbglogo.png" alt="Logo" class="image is-64x64 p-1">
             <div class="navbar-item navbar-center has-text-weight-bold is-size-3">
-            <span class="has-text-success">d</span>
-                <span class="has-text-warning mr-2">o</span>
-                <span class="has-text-white-ter">w</span>
-                <span class="has-text-danger">h</span>
-                <span class="has-text-primary">i</span>
-                <span class="has-text-danger">l</span>
-                <span class="has-text-info mr-2">e</span>
-                <span class="has-text-warning ">😭</span>
+                <span class="has-text-success">B</span>
+                <span class="has-text-warning">l</span>
+                <span class="has-text-white-ter">o</span>
+                <span class="has-text-primary">c</span>
+                <span class="has-text-danger mr-2">k</span>
+                <span class="has-text-info">B</span>
+                <span class="has-text-primary ">u</span>
+                <span class="has-text-warning">d</span>
+                <span class="has-text-danger">d</span>
+                <span class="has-text-white-ter">y</span>
             </div>
         </div>
 
@@ -75,10 +77,10 @@
                 <h3 class="title is-4 mb-1">MAGISTRADO, Zach Stephan A.</h3>
             </section>
             <footer class="modal-card-foot center-footer">
-            <div class="footer-content">
-                <h3 class="title is-4 mb-1">3rd Year BSCS - AN31</h3>
-                <h4 class="subtitle is-6">CS0035: Final Project</h4>
-            </div> 
+                <div class="footer-content">
+                    <h3 class="title is-4 mb-1">3rd Year BSCS - AN31</h3>
+                    <h4 class="subtitle is-6">CS0035: Final Project</h4>
+                </div>
             </footer>
 
 
